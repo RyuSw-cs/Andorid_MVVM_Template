@@ -22,6 +22,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project>{
                 apply("com.android.application")
                 apply("org.jetbrains.kotlin.android")
                 apply("kotlin-parcelize")
+                apply("androidx.navigation.safeargs.kotlin")
                 // 여기서 사용되는 플러그인은 bulid-logic에 있는 AndroidHiltConventionPlugin
                 apply("ryusw.hilt")
             }
@@ -56,6 +57,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project>{
                 dependencies {
                     add("implementation", project(":domain"))
                     add("implementation", project(":data"))
+                    add("implementation", project(":feature:main"))
                     add("implementation", project(":feature:movie-detail"))
                     add("implementation", project(":feature:movie-search"))
                     add("implementation", project(":common"))

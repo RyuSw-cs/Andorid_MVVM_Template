@@ -19,6 +19,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             pluginManager.apply {
                 apply("ryusw.android.library")
                 apply("org.jetbrains.kotlin.android")
+                apply("androidx.navigation.safeargs.kotlin")
                 apply("kotlin-parcelize")
                 apply("ryusw.hilt")
             }
