@@ -28,15 +28,9 @@ open class BaseViewModel : ViewModel(){
     }
 
     protected val baseViewModelScope = viewModelScope + errorHandler
-    protected fun showLoadingDialog(){
+    protected fun changeLoadingState(state : Boolean){
         baseViewModelScope.launch {
-            _loadingEvent.emit(true)
-        }
-    }
-
-    protected fun dismissLoadingDialog(){
-        baseViewModelScope.launch {
-            _loadingEvent.emit(false)
+            _loadingEvent.emit(state)
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.ryusw.template.common.util
+package com.ryusw.template.common.view
 
 import android.view.View
 import android.view.View.OnClickListener
