@@ -6,7 +6,9 @@ import com.ryusw.template.data.util.HandleApi
 import com.ryusw.template.domain.entitiy.user.User
 import com.ryusw.template.domain.repository.UserRepository
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 internal class UserRepositoryImpl @Inject constructor(
     private val userApi: UserApi
 ) : UserRepository {
