@@ -1,7 +1,7 @@
 plugins{
-    id("ryusw.android.library")
+    id("ryusw.common")
 }
 
 android {
-    namespace = "com.ryusw.common"
+    namespace = "com.ryusw.template.common"
 }

@@ -38,6 +38,10 @@ gradlePlugin {
             id = "ryusw.android.library"
             implementationClass = "com.ryusw.convention.AndroidLibraryConventionPlugin"
         }
+        register("AndroidCommon") {
+            id = "ryusw.common"
+            implementationClass = "com.ryusw.convention.AndroidCommonConventionPlugin"
+        }
         register("JavaLibrary") {
             id = "ryusw.java.library"
             implementationClass = "com.ryusw.convention.JavaLibraryConventionPlugin"

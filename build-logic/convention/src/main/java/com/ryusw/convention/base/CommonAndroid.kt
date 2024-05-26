@@ -1,5 +1,6 @@
 package com.ryusw.convention.base
 
+import com.android.build.api.dsl.BuildFeatures
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
@@ -13,6 +14,13 @@ internal fun Project.configureCommonAndroid(
     commonExtension : CommonExtension<*,*,*,*,*>
 ) {
     commonExtension.apply {
+
+        with(buildFeatures){
+            dataBinding {
+                enable = true
+            }
+        }
+
         val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
         dependencies {
             add("implementation", libs.findLibrary("junit-junit").get())
