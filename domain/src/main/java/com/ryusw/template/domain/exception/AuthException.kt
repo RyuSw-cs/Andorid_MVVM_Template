@@ -1,4 +1,4 @@
-package com.ryusw.template.domain.exception.auth
+package com.ryusw.template.domain.exception
 
 sealed class AuthException : Exception{
     constructor() : super()

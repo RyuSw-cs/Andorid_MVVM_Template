@@ -1,7 +1,7 @@
 package com.ryusw.template.data.di
 
 import com.ryusw.template.data.local.datasource.AuthDataStore
-import com.ryusw.template.data.remote.api.AuthApi
+import com.ryusw.template.data.remote.api.UserApi
 import com.ryusw.template.data.remote.interceptor.NetworkInterceptor
 import com.ryusw.template.data.remote.interceptor.TokenInterceptor
 import dagger.Module
@@ -63,9 +63,9 @@ internal object NetworkModule {
     @Named("networkInterceptor")
     fun provideNetworkInterceptor(
         authDataStore: AuthDataStore,
-        authApi : AuthApi
+        userApi : UserApi
     ) : Interceptor {
-        return NetworkInterceptor(authDataStore, authApi)
+        return NetworkInterceptor(authDataStore, userApi)
     }
 
     @Singleton

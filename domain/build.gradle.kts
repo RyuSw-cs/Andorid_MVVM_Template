@@ -1,9 +1,9 @@
-plugins {
-    id("java-library")
-    alias(libs.plugins.jetbrainsKotlinJvm)
+plugins{
+    id("ryusw.java.library")
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+dependencies {
+    implementation(libs.kotlin.coroutine.core)
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.javax.inject)
 }

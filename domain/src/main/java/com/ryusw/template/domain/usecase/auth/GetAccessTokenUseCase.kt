@@ -1,4 +1,12 @@
 package com.ryusw.template.domain.usecase.auth
 
-class GetAccessTokenUseCase {
+import com.ryusw.template.domain.repository.AuthRepository
+import javax.inject.Inject
+
+class GetAccessTokenUseCase @Inject constructor(
+    private val authRepository: AuthRepository
+){
+    suspend operator fun invoke() : Result<String> {
+        return authRepository.getAccessToken()
+    }
 }

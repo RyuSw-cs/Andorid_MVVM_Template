@@ -2,7 +2,7 @@ package com.ryusw.template.data.remote.interceptor
 
 import com.ryusw.template.data.local.datasource.AuthDataStore
 import com.ryusw.template.data.remote.api.AuthApi
-import com.ryusw.template.domain.exception.auth.AuthException
+import com.ryusw.template.domain.exception.AuthException
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -18,7 +18,7 @@ internal class NetworkInterceptor @Inject constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val response = chain.proceed(request)
-        var newAccessToken = ""
+        var accessToken = ""
 
         if(response.code == 401){
             runBlocking {
@@ -27,12 +27,12 @@ internal class NetworkInterceptor @Inject constructor(
                     throw AuthException.EmptyTokenException("토큰이 존재하지 않습니다.")
                 }
 
-                newAccessToken = authApi.login(expireAccessToken).token
-                authDataStore.setAccessToken(newAccessToken)
+                accessToken = authApi.refreshToken(expireAccessToken).accessToken
+                authDataStore.setAccessToken(accessToken)
             }
         }
         val newRequest = request.newBuilder()
-            .addHeader("Authorization", "Bearer $newAccessToken")
+            .addHeader("Authorization", "Bearer $accessToken")
             .build()
 
         return chain.proceed(newRequest)
