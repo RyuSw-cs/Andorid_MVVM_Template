@@ -51,13 +51,14 @@ class AndroidApplicationConventionPlugin : Plugin<Project>{
                         // gradle 8.0부터 buildConfig를 사용하기 위함
                         buildConfig = true
                     }
+
+                    buildConfigField("String", "TMDB_API_KEY", properties.getProperty("TMDB_API_KEY"))
                 }
 
                 val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
                 dependencies {
                     add("implementation", project(":domain"))
                     add("implementation", project(":data"))
-                    add("implementation", project(":feature:main"))
                     add("implementation", project(":feature:movie-detail"))
                     add("implementation", project(":feature:movie-search"))
                     add("implementation", project(":common"))

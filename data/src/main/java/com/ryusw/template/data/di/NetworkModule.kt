@@ -1,7 +1,7 @@
 package com.ryusw.template.data.di
 
 import com.ryusw.template.data.local.datasource.AuthDataStore
-import com.ryusw.template.data.remote.api.UserApi
+import com.ryusw.template.data.remote.api.AuthApi
 import com.ryusw.template.data.remote.interceptor.NetworkInterceptor
 import com.ryusw.template.data.remote.interceptor.TokenInterceptor
 import dagger.Module
@@ -20,7 +20,7 @@ import javax.inject.Singleton
 @Module
 internal object NetworkModule {
 
-    private const val SERVER_BASE_URL = "https://example.com"
+    private const val SERVER_BASE_URL = "https://api.themoviedb.org/3"
 
     @Singleton
     @Provides
@@ -63,9 +63,9 @@ internal object NetworkModule {
     @Named("networkInterceptor")
     fun provideNetworkInterceptor(
         authDataStore: AuthDataStore,
-        userApi : UserApi
+        authApi : AuthApi
     ) : Interceptor {
-        return NetworkInterceptor(authDataStore, userApi)
+        return NetworkInterceptor(authDataStore, authApi)
     }
 
     @Singleton

@@ -27,7 +27,7 @@ internal class NetworkInterceptor @Inject constructor(
                     throw AuthException.EmptyTokenException("토큰이 존재하지 않습니다.")
                 }
 
-                accessToken = authApi.refreshToken(expireAccessToken).accessToken
+                // TODO AuthApi에 Token Refresh API 호출
                 authDataStore.setAccessToken(accessToken)
             }
         }

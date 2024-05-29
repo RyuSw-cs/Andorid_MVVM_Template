@@ -1,7 +1,7 @@
 package com.ryusw.template.domain.repository
 
+import com.ryusw.template.domain.entitiy.auth.RequestToken
+
 interface AuthRepository {
-    suspend fun setAccessToken(accessToken : String) : Boolean
-    suspend fun getAccessToken() : String
-    suspend fun refreshToken(accessToken : String) : Boolean
+    suspend fun getRequestToken() : RequestToken
 }
