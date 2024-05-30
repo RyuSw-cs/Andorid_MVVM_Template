@@ -3,5 +3,5 @@ plugins {
 }
 
 android {
-    namespace = "com.ryusw.movie.search"
+    namespace = "com.ryusw.feature.movie.search"
 }

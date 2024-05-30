@@ -24,12 +24,14 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/build-logic/convention" />
-            <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/common-ui" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/login" />
             <option value="$PROJECT_DIR$/feature/movie-detail" />
             <option value="$PROJECT_DIR$/feature/movie-search" />
+            <option value="$PROJECT_DIR$/feature/splash" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

@@ -32,7 +32,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
             dependencies {
                 add("implementation", project(":domain"))
-                add("implementation", project(":common"))
+                add("implementation", project(":common-ui"))
 
                 // Android Common
                 add("implementation", libs.findLibrary("androidx-core").get())

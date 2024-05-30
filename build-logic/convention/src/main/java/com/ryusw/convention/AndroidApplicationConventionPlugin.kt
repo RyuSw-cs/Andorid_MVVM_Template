@@ -59,9 +59,11 @@ class AndroidApplicationConventionPlugin : Plugin<Project>{
                 dependencies {
                     add("implementation", project(":domain"))
                     add("implementation", project(":data"))
+                    add("implementation", project(":feature:login"))
                     add("implementation", project(":feature:movie-detail"))
                     add("implementation", project(":feature:movie-search"))
-                    add("implementation", project(":common"))
+                    add("implementation", project(":feature:splash"))
+                    add("implementation", project(":common-ui"))
 
                     // Android Common
                     add("implementation", libs.findLibrary("androidx-core").get())

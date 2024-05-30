@@ -10,11 +10,11 @@ pluginManagement {
 
 rootProject.name = "ryusw"
 include(":app")
-include(":common")
+include(":common-ui")
 include(":feature")
 include(":domain")
 include(":data")
 include(":feature:movie-search")
 include(":feature:movie-detail")
 include(":feature:login")
-include(":feature:main")
+include(":feature:splash")
