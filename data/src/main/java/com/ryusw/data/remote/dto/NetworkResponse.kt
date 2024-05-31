@@ -1,4 +1,4 @@
-package com.ryusw.template.data.remote.dto
+package com.ryusw.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
 

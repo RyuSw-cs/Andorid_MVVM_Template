@@ -1,6 +1,6 @@
-package com.ryusw.template.data.remote.interceptor
+package com.ryusw.data.remote.interceptor
 
-import com.ryusw.template.data.local.datasource.AuthDataStore
+import com.ryusw.data.local.datasource.AuthDataStore
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -13,9 +13,9 @@ internal class TokenInterceptor @Inject constructor(
         val request = chain.request()
         val newRequest = request.newBuilder()
         // TODO runBlocking이 최선일까?
-        runBlocking {
-            newRequest.addHeader("Authorization", "Bearer ${authDataStore.getAccessToken()}")
-        }
+//        runBlocking {
+//            newRequest.addHeader("Authorization", "Bearer ${authDataStore.getAccessToken()}")
+//        }
         return chain.proceed(newRequest.build())
     }
 }

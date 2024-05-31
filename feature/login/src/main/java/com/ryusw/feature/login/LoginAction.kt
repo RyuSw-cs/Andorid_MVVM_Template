@@ -1,7 +1,6 @@
 package com.ryusw.feature.login
 
 sealed interface LoginAction {
-    class ShowDialog(title : String = "알림", message : String) : LoginAction
+    class ShowDialog(val title : String = "알림", val content : String) : LoginAction
     data object NavigateMovieSearch : LoginAction
-    data object DoLogin : LoginAction
 }

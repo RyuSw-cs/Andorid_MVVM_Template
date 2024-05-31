@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="vm"
             type="com.ryusw.feature.login.LoginViewModel" />
@@ -32,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="56dp"
             android:hint="ID"
-            android:text="@{vm._id}"
+            android:text="@{vm.state.id}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title" />
@@ -43,8 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:hint="PASSWORD"
-            android:text="@{vm._password}"
             android:inputType="textPassword"
+            android:text="@{vm.state.password}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edit_id" />
@@ -53,12 +54,13 @@
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:enabled="@{vm.state.loginEnable}"
             android:text="login"
-            app:onClick="@{() -> vm.requestLogin()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_password" />
+            app:layout_constraintTop_toBottomOf="@id/edit_password"
+            app:onClick="@{() -> vm.requestLogin()}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

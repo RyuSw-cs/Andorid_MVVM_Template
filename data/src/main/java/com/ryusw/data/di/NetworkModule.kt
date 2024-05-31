@@ -1,14 +1,14 @@
-package com.ryusw.template.data.di
+package com.ryusw.data.di
 
-import com.ryusw.template.data.local.datasource.AuthDataStore
-import com.ryusw.template.data.remote.api.AuthApi
-import com.ryusw.template.data.remote.interceptor.NetworkInterceptor
-import com.ryusw.template.data.remote.interceptor.TokenInterceptor
+import com.ryusw.data.BuildConfig
+import com.ryusw.data.local.datasource.AuthDataStore
+import com.ryusw.data.remote.api.AuthApi
+import com.ryusw.data.remote.interceptor.NetworkInterceptor
+import com.ryusw.data.remote.interceptor.TokenInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -20,12 +20,12 @@ import javax.inject.Singleton
 @Module
 internal object NetworkModule {
 
-    private const val SERVER_BASE_URL = "https://api.themoviedb.org/3"
+    private const val SERVER_BASE_URL = "https://api.themoviedb.org/3/"
 
     @Singleton
     @Provides
     fun provideRetrofit(
-        okHttpClient: OkHttpClient
+        @Named("okHttpClient") okHttpClient: OkHttpClient
     ) : Retrofit {
         return Retrofit.Builder()
             .baseUrl(SERVER_BASE_URL)
@@ -36,14 +36,15 @@ internal object NetworkModule {
 
     @Singleton
     @Provides
+    @Named("okHttpClient")
     fun provideOkHttpInterceptor(
         httpLoggingInterceptor: HttpLoggingInterceptor,
-        @Named("networkInterceptor") networkInterceptor: Interceptor,
-        @Named("tokenInterceptor") tokenInterceptor: Interceptor
+        @Named("networkInterceptor") networkInterceptor: NetworkInterceptor,
+        @Named("tokenInterceptor") tokenInterceptor: TokenInterceptor
     ) : OkHttpClient {
         val builder = OkHttpClient.Builder()
-            .addInterceptor(tokenInterceptor)
-            .addNetworkInterceptor(networkInterceptor)
+            .addNetworkInterceptor(tokenInterceptor)
+            .addInterceptor(networkInterceptor)
 
         if(BuildConfig.DEBUG){
             builder.addInterceptor(httpLoggingInterceptor)
@@ -63,9 +64,8 @@ internal object NetworkModule {
     @Named("networkInterceptor")
     fun provideNetworkInterceptor(
         authDataStore: AuthDataStore,
-        authApi : AuthApi
-    ) : Interceptor {
-        return NetworkInterceptor(authDataStore, authApi)
+    ) : NetworkInterceptor {
+        return NetworkInterceptor(authDataStore,)
     }
 
     @Singleton
@@ -73,7 +73,7 @@ internal object NetworkModule {
     @Named("tokenInterceptor")
     fun provideTokenInterceptor(
         authDataStore: AuthDataStore
-    ) : Interceptor {
+    ) : TokenInterceptor {
         return TokenInterceptor(authDataStore)
     }
 }

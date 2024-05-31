@@ -26,10 +26,6 @@ class AndroidApplicationConventionPlugin : Plugin<Project>{
                 // 여기서 사용되는 플러그인은 bulid-logic에 있는 AndroidHiltConventionPlugin
                 apply("ryusw.hilt")
             }
-            // local.properties 정보를 가져오기 위함
-            val properties = Properties()
-            properties.load(project.rootProject.file("local.properties").inputStream())
-
             // Application 정보를 추가하기위해 'ApplicatoinExtension'을 가져옴
             extensions.configure<ApplicationExtension> {
                 // app 모듈은 모든 정보가 필요함
@@ -51,8 +47,6 @@ class AndroidApplicationConventionPlugin : Plugin<Project>{
                         // gradle 8.0부터 buildConfig를 사용하기 위함
                         buildConfig = true
                     }
-
-                    buildConfigField("String", "TMDB_API_KEY", properties.getProperty("TMDB_API_KEY"))
                 }
 
                 val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")

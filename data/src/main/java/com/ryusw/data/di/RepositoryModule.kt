@@ -1,6 +1,6 @@
-package com.ryusw.template.data.di
+package com.ryusw.data.di
 
-import com.ryusw.template.data.repository.AuthRepositoryImpl
+import com.ryusw.data.repository.AuthRepositoryImpl
 import com.ryusw.domain.repository.AuthRepository
 import dagger.Binds
 import dagger.Module

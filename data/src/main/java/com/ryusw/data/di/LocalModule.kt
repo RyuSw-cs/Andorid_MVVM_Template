@@ -1,14 +1,15 @@
-package com.ryusw.template.data.di
+package com.ryusw.data.di
 
 import android.content.Context
-import com.ryusw.template.data.local.datasource.AuthDataStore
+import com.ryusw.data.local.datasource.AuthDataStore
+import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-@Singleton
+@Module
 @InstallIn(SingletonComponent::class)
 internal object LocalModule {
     @Provides

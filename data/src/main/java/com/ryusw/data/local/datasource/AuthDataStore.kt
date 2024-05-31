@@ -1,12 +1,13 @@
-package com.ryusw.template.data.local.datasource
+package com.ryusw.data.local.datasource
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.first
 internal class AuthDataStore(
-    private val context: Context
+    @ApplicationContext private val context: Context
 ) {
     private val Context.dataStore by preferencesDataStore("AUTH")
     private val accessTokenPreference = stringPreferencesKey("ACCESS_TOKEN")

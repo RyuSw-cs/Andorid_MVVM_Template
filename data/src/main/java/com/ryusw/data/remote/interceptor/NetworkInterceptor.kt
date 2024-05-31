@@ -1,7 +1,7 @@
-package com.ryusw.template.data.remote.interceptor
+package com.ryusw.data.remote.interceptor
 
-import com.ryusw.template.data.local.datasource.AuthDataStore
-import com.ryusw.template.data.remote.api.AuthApi
+import com.ryusw.data.local.datasource.AuthDataStore
+import com.ryusw.data.remote.api.AuthApi
 import com.ryusw.domain.exception.AuthException
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
@@ -13,7 +13,6 @@ import javax.inject.Inject
  * */
 internal class NetworkInterceptor @Inject constructor(
     private val authDataStore: AuthDataStore,
-    private val authApi: AuthApi
 ) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
@@ -24,15 +23,17 @@ internal class NetworkInterceptor @Inject constructor(
             runBlocking {
                 val expireAccessToken = authDataStore.getAccessToken()
                 if(expireAccessToken.isEmpty()){
-                    throw AuthException.EmptyTokenException("토큰이 존재하지 않습니다.")
+                    // TODO 토큰을 사용한다면 주석 해제
+//                    throw AuthException.EmptyTokenException("토큰이 존재하지 않습니다.")
                 }
 
                 // TODO AuthApi에 Token Refresh API 호출
                 authDataStore.setAccessToken(accessToken)
             }
         }
-        val newRequest = request.newBuilder()
-            .addHeader("Authorization", "Bearer $accessToken")
+        // TODO 새로 발급받은 토큰을 헤더에 적용
+        val newRequest = chain.request().newBuilder()
+//            .addHeader("Authorization", "Bearer $accessToken")
             .build()
 
         return chain.proceed(newRequest)

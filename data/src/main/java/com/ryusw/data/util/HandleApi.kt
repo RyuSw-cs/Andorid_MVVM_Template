@@ -1,7 +1,7 @@
-package com.ryusw.template.data.util
+package com.ryusw.data.util
 
 import com.google.gson.Gson
-import com.ryusw.template.data.remote.dto.NetworkResponse
+import com.ryusw.data.remote.dto.NetworkResponse
 import com.ryusw.domain.exception.AuthException
 import retrofit2.HttpException
 
@@ -30,6 +30,8 @@ internal object HandleApi {
 
         return when (failResponse.statusCode) {
             3 -> AuthException.AuthenticationFailedException(failResponse.statusMessage)
+            33 -> AuthException.InvalidRequestTokenException(failResponse.statusMessage)
+            30 -> AuthException.InvalidAccountException(failResponse.statusMessage)
             else -> Exception(failResponse.statusMessage)
         }
     }

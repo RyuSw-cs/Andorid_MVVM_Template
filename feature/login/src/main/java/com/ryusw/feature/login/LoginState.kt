@@ -1,5 +1,8 @@
 package com.ryusw.feature.login
 
 data class LoginState(
-    var loading : Boolean = false
-)
+    val id : String = "",
+    val password : String = ""
+) {
+    val loginEnable = id.isNotBlank() && password.isNotBlank()
+}

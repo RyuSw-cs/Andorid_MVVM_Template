@@ -1,6 +1,6 @@
 package com.ryusw.data.di
 
-import com.ryusw.template.data.remote.api.AuthApi
+import com.ryusw.data.remote.api.AuthApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,5 +13,7 @@ internal object ApiModule {
     @Provides
     fun provideAuthApi(
         retrofit : Retrofit
-    ) = retrofit.create(AuthApi::class.java)
+    ) : AuthApi {
+        return retrofit.create(AuthApi::class.java)
+    }
 }

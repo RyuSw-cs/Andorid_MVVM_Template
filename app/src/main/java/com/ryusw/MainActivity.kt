@@ -1,19 +1,23 @@
 package com.ryusw
 
+import androidx.navigation.fragment.NavHostFragment
 import com.ryusw.databinding.ActivityMainBinding
 import com.ryusw.common.ui.base.BaseActivity
-import com.ryusw.R
 import com.ryusw.common.ui.base.NavigationEvent
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(), NavigationEvent {
     override val layoutResourceId: Int
         get() = R.layout.activity_main
 
-    override fun init() {
-        // nav 초기화
+    private val navHostFragment by lazy {
+        supportFragmentManager.findFragmentById(R.id.fcv_main) as NavHostFragment
     }
 
+    override fun init() {}
+
     override fun navigateSplashToLogin() {
-        // feature간 navigate 할때 필요
+        navHostFragment.navController.navigate(R.id.action_splash_to_login)
     }
 }

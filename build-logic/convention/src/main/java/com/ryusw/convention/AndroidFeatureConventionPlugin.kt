@@ -9,6 +9,7 @@ import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
+import java.util.Properties
 
 /**
  * Feature 모듈에 적용하기 위함
@@ -24,9 +25,18 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 apply("ryusw.hilt")
             }
 
+            val properties = Properties()
+            properties.load(project.rootProject.file("local.properties").inputStream())
+
             extensions.configure<LibraryExtension> {
                 configureCommonAndroid(this)
                 configureAndroidCompose(this)
+                defaultConfig {
+                    buildFeatures {
+                        buildConfig = true
+                    }
+                    buildConfigField("String", "TMDB_API_KEY", properties.getProperty("TMDB_API_KEY"))
+                }
             }
 
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")

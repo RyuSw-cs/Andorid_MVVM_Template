@@ -16,7 +16,6 @@ class DelayButtonClickListener(
     override fun onClick(v: View?) {
         if(clickEnableState.getAndSet(false)){
             onClickListener.onClick(v)
-        } else {
             v?.postDelayed({
                 clickEnableState.set(true)
             }, delayMillis)

@@ -1,46 +1,47 @@
 package com.ryusw.feature.splash
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ryusw.domain.usecase.auth.CheckApiKeyValidate
+import com.ryusw.common.ui.base.BaseViewModel
+import com.ryusw.common.ui.logger.RyuSwLogger
+import com.ryusw.domain.usecase.auth.CheckApiKeyValidateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val checkApiKeyValidate: CheckApiKeyValidate
-) : ViewModel() {
+    private val checkApiKeyValidateUseCase: CheckApiKeyValidateUseCase
+) : BaseViewModel() {
     init {
-        validateApiKey(BuildConfig.API_KEY)
+        validateApiKey()
     }
 
     private val _action: MutableSharedFlow<SplashAction> = MutableSharedFlow()
     val action: SharedFlow<SplashAction> get() = _action.asSharedFlow()
 
-    private val _state: MutableStateFlow<SplashState> = MutableStateFlow(SplashState())
-    val state: StateFlow<SplashState> get() = _state.asStateFlow()
-
-    private fun validateApiKey(apiKey: String) {
+    private fun validateApiKey() {
         viewModelScope.launch {
+            RyuSwLogger.v(CLASSNAME, "validateApiKey", "start")
+            _loading.emit(true)
             kotlin.runCatching {
-                checkApiKeyValidate(apiKey)
-            }.onSuccess { validateResult ->
-                _state.update { state ->
-                    state.copy(
-                        validateSuccess = validateResult
-                    )
-                }
+                checkApiKeyValidateUseCase(BuildConfig.TMDB_API_KEY)
+            }.onSuccess {
+                RyuSwLogger.v(CLASSNAME, "validateApiKey", "success")
+                _loading.emit(false)
+                _action.emit(SplashAction.NavigateToLogin)
             }.onFailure {
+                RyuSwLogger.w(CLASSNAME, "validateApiKey", "exception = ${it.message}")
+                _loading.emit(false)
                 _action.emit(SplashAction.ShowToast(it.message.toString()))
             }
+            RyuSwLogger.v(CLASSNAME, "validateApiKey", "end")
         }
+    }
+
+    companion object {
+        private const val CLASSNAME = "SplashViewModel"
     }
 }
