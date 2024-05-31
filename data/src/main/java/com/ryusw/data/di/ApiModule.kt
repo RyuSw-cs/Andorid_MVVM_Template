@@ -1,6 +1,7 @@
 package com.ryusw.data.di
 
 import com.ryusw.data.remote.api.AuthApi
+import com.ryusw.data.remote.api.MovieApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,5 +16,12 @@ internal object ApiModule {
         retrofit : Retrofit
     ) : AuthApi {
         return retrofit.create(AuthApi::class.java)
+    }
+
+    @Provides
+    fun provideMovieApi(
+        retrofit : Retrofit
+    ) : MovieApi {
+        return retrofit.create(MovieApi::class.java)
     }
 }

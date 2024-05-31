@@ -54,9 +54,8 @@ class AndroidApplicationConventionPlugin : Plugin<Project>{
                     add("implementation", project(":domain"))
                     add("implementation", project(":data"))
                     add("implementation", project(":feature:login"))
-                    add("implementation", project(":feature:movie-detail"))
-                    add("implementation", project(":feature:movie-search"))
                     add("implementation", project(":feature:splash"))
+                    add("implementation", project(":feature:movie-list"))
                     add("implementation", project(":common-ui"))
 
                     // Android Common

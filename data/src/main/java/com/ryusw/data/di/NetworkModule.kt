@@ -21,6 +21,7 @@ import javax.inject.Singleton
 internal object NetworkModule {
 
     private const val SERVER_BASE_URL = "https://api.themoviedb.org/3/"
+    const val SERVER_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/"
 
     @Singleton
     @Provides
