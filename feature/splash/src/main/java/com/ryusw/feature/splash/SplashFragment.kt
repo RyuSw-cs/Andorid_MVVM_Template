@@ -35,6 +35,16 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>() {
                         }
                     }
                 }
+
+                launch {
+                    viewModel.loading.collect {loading ->
+                        if(loading){
+                            showLoadingDialog()
+                        } else {
+                            dismissLoadingDialog()
+                        }
+                    }
+                }
             }
         }
     }

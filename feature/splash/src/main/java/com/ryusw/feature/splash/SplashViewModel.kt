@@ -1,7 +1,7 @@
 package com.ryusw.feature.splash
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ryusw.common.ui.base.BaseViewModel
 import com.ryusw.common.ui.logger.RyuSwLogger
 import com.ryusw.domain.usecase.auth.CheckApiKeyValidateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,13 +14,16 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val checkApiKeyValidateUseCase: CheckApiKeyValidateUseCase
-) : BaseViewModel() {
+) : ViewModel() {
     init {
         validateApiKey()
     }
 
     private val _action: MutableSharedFlow<SplashAction> = MutableSharedFlow()
     val action: SharedFlow<SplashAction> get() = _action.asSharedFlow()
+
+    private val _loading: MutableSharedFlow<Boolean> = MutableSharedFlow()
+    val loading : SharedFlow<Boolean> get() = _loading.asSharedFlow()
 
     private fun validateApiKey() {
         viewModelScope.launch {
@@ -44,4 +47,9 @@ class SplashViewModel @Inject constructor(
     companion object {
         private const val CLASSNAME = "SplashViewModel"
     }
+}
+
+sealed interface SplashAction {
+    data object NavigateToLogin : SplashAction
+    class ShowToast(val message: String) : SplashAction
 }

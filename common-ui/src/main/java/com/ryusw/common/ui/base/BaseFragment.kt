@@ -18,7 +18,7 @@ import com.ryusw.common.ui.dialog.LoadingDialogFragment
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel> : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding, R : ViewModel> : Fragment() {
 
     // 사용하고자 하는 layoutId
     abstract val layoutResourceId: Int
@@ -62,27 +62,13 @@ abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel> : Fragment()
         initObserving()
     }
 
-    private fun initBaseObserving() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.loading.collect { visibility ->
-                    if (visibility) {
-                        showLoadingDialog()
-                    } else {
-                        dismissLoadingDialog()
-                    }
-                }
-            }
-        }
-    }
-
-    private fun showLoadingDialog() {
+    protected fun showLoadingDialog() {
         if (!loadingDialog.isAdded) {
             loadingDialog.show(childFragmentManager, LoadingDialogFragment::class.java.simpleName)
         }
     }
 
-    private fun dismissLoadingDialog() {
+    protected fun dismissLoadingDialog() {
         if (!loadingDialog.isHidden) {
             loadingDialog.dismissAllowingStateLoss()
         }

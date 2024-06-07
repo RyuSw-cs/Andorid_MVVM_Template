@@ -55,6 +55,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                 }
 
                 launch {
+                    viewModel.loading.collect {loading ->
+                        if(loading){
+                            showLoadingDialog()
+                        } else {
+                            dismissLoadingDialog()
+                        }
+                    }
+                }
+
+                launch {
                     viewModel.state.collect { state ->
                         binding.btnLogin.isEnabled = state.loginEnable
                     }

@@ -1,9 +1,7 @@
 package com.ryusw.feature.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ryusw.common.ui.base.BaseViewModel
 import com.ryusw.domain.exception.AuthException
 import com.ryusw.domain.usecase.auth.GetRequestTokenUseCase
 import com.ryusw.domain.usecase.auth.LoginUseCase
@@ -23,9 +21,12 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val getRequestTokenUseCase: GetRequestTokenUseCase,
     private val loginUseCase: LoginUseCase
-) : BaseViewModel() {
+) : ViewModel() {
     private val _action: MutableSharedFlow<LoginAction> = MutableSharedFlow()
     val action: SharedFlow<LoginAction> get() = _action.asSharedFlow()
+
+    private val _loading : MutableSharedFlow<Boolean> = MutableSharedFlow()
+    val loading : SharedFlow<Boolean> get() = _loading.asSharedFlow()
 
     private val _state: MutableStateFlow<LoginState> = MutableStateFlow(LoginState())
     val state: StateFlow<LoginState> get() = _state.asStateFlow()
@@ -93,4 +94,17 @@ class LoginViewModel @Inject constructor(
             )
         }
     }
+}
+
+data class LoginState(
+    val id : String = "",
+    val password : String = ""
+) {
+    val loginEnable = id.isNotBlank() && password.isNotBlank()
+}
+
+
+sealed interface LoginAction {
+    class ShowDialog(val title : String = "알림", val content : String) : LoginAction
+    data object NavigateMovieSearch : LoginAction
 }
