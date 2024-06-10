@@ -6,6 +6,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.ryusw.common.ui.base.BaseFragment
+import com.ryusw.common.ui.base.NavigationEvent
 import com.ryusw.common.ui.dialog.CommonDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -48,7 +49,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                                 ).show(childFragmentManager, null)
                             }
                             is LoginAction.NavigateMovieSearch -> {
-
+                                (activity as NavigationEvent).navigateLoginToMovieList()
                             }
                         }
                     }

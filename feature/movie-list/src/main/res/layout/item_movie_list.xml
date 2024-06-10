@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="vm"
             type="com.ryusw.feature.movie.list.MovieListViewModel" />
@@ -16,7 +15,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:onClick="@{() -> vm.navigateToMovieDetail(data.id)}">
 
         <ImageView
             android:id="@+id/img_poster"

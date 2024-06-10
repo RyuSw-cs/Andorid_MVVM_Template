@@ -12,6 +12,7 @@ internal class TokenInterceptor @Inject constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val newRequest = request.newBuilder()
+
         // TODO runBlocking이 최선일까?
 //        runBlocking {
 //            newRequest.addHeader("Authorization", "Bearer ${authDataStore.getAccessToken()}")

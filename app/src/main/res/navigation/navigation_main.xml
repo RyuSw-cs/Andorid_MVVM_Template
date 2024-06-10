@@ -4,11 +4,18 @@
     android:id="@+id/navigation_main"
     app:startDestination="@id/navigation_splash">
 
-    <include app:graph="@navigation/navigation_splash"/>
+    <include app:graph="@navigation/navigation_splash" />
     <include app:graph="@navigation/navigation_login" />
+    <include app:graph="@navigation/navigation_movie_list" />
 
     <action
         android:id="@+id/action_splash_to_login"
         app:destination="@id/navigation_login" />
+
+    <action
+        android:id="@+id/action_login_to_movie_list"
+        app:destination="@id/navigation_movie_list" />
+
+
 
 </navigation>

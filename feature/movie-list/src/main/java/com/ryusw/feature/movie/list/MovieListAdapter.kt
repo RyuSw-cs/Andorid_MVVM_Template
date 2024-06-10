@@ -11,22 +11,20 @@ import ryusw.feature.movie.list.R
 import ryusw.feature.movie.list.databinding.ItemMovieListBinding
 
 class MovieListAdapter (
-    private val vm : MovieListViewModel
+    private val viewModel : MovieListViewModel
 ) : ListAdapter<MovieListUiModel, MovieListAdapter.MovieListViewHolder>(MovieListDiffUtil){
 
-    inner class MovieListViewHolder(private val binding : ItemMovieListBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(data : MovieListUiModel){
-            binding.vm = vm
-            binding.data = data
-        }
-    }
+    inner class MovieListViewHolder(val binding : ItemMovieListBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MovieListViewHolder(
         DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_movie_list, parent, false)
     )
 
     override fun onBindViewHolder(holder: MovieListViewHolder, position: Int) {
-        holder.bind(currentList[position])
+        with(holder.binding){
+            data = currentList[position]
+            vm = viewModel
+        }
     }
 
     object MovieListDiffUtil : DiffUtil.ItemCallback<MovieListUiModel>(){

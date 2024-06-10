@@ -1,13 +1,20 @@
 package com.ryusw.feature.movie.list
 
+import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.ryusw.common.ui.base.BaseFragment
+import com.ryusw.common.ui.dialog.CommonDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import ryusw.feature.movie.list.R
 import ryusw.feature.movie.list.databinding.FragmentMovieListBinding
 
 @AndroidEntryPoint
-class MovieListFragment : BaseFragment<FragmentMovieListBinding, MovieListViewModel>(){
+class MovieListFragment : BaseFragment<FragmentMovieListBinding, MovieListViewModel>() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_movie_list
     override val viewModel: MovieListViewModel by viewModels()
@@ -15,18 +22,56 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding, MovieListViewMo
     private val movieAdapter by lazy { MovieListAdapter(viewModel) }
 
     override fun initView() {
-        with(binding){
+        viewModel.getPopularMovieList()
+        with(binding) {
             listMovie.adapter = movieAdapter
         }
     }
 
     override fun initDataBinding() {
-        with(binding){
+        with(binding) {
             vm = viewModel
         }
     }
 
     override fun initObserving() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.state.collect { state ->
+                        binding.viewListState.visibility =
+                            if (state.isEmpty) View.VISIBLE else View.GONE
+                        movieAdapter.submitList(state.popularMovieList)
+                    }
+                }
 
+                launch {
+                    viewModel.loading.collect { loadingState ->
+                        if (loadingState) {
+                            showLoadingDialog()
+                        } else {
+                            dismissLoadingDialog()
+                        }
+                    }
+                }
+
+                launch {
+                    viewModel.action.collect { action ->
+                        when (action) {
+                            is MovieListAction.NavigateToMovieDetail -> {
+
+                            }
+
+                            is MovieListAction.ShowErrorDialog -> {
+                                CommonDialogFragment(
+                                    title = action.title,
+                                    content = action.content
+                                ).show(childFragmentManager, null)
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -15,9 +15,28 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), NavigationEvent {
         supportFragmentManager.findFragmentById(R.id.fcv_main) as NavHostFragment
     }
 
-    override fun init() {}
+    override fun init() {
+        navHostFragment.navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            when (destination.id) {
+                ryusw.feature.login.R.id.loginFragment -> {
+
+                }
+            }
+        }
+    }
 
     override fun navigateSplashToLogin() {
-        navHostFragment.navController.navigate(R.id.action_splash_to_login)
+        with(navHostFragment.navController){
+            popBackStack(com.ryusw.feature.splash.R.id.navigation_splash, true)
+            navigate(R.id.action_splash_to_login)
+        }
+    }
+
+    override fun navigateLoginToMovieList() {
+        navHostFragment.navController.navigate(R.id.action_login_to_movie_list)
+    }
+
+    override fun navigateMovieListToMovieInfo(id: Int) {
+
     }
 }

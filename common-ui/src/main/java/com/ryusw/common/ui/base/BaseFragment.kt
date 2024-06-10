@@ -69,7 +69,7 @@ abstract class BaseFragment<T : ViewDataBinding, R : ViewModel> : Fragment() {
     }
 
     protected fun dismissLoadingDialog() {
-        if (!loadingDialog.isHidden) {
+        if (loadingDialog.isAdded) {
             loadingDialog.dismissAllowingStateLoss()
         }
     }
