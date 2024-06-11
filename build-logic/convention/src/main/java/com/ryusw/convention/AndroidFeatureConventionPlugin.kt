@@ -72,9 +72,11 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 add("implementation", libs.findBundle("lifecycle").get())
                 add("implementation", libs.findBundle("kotlinx-coroutine").get())
 
-
                 // Data Store
                 add("implementation", libs.findBundle("datastore").get())
+
+                // paging
+                add("implementation", libs.findLibrary("androidx-paging").get())
             }
         }
     }

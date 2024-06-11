@@ -4,6 +4,7 @@ kotlin = "1.9.22"
 junit = "4.13.2"
 testJunit = "1.1.5"
 espresso = "3.5.1"
+paging = "3.3.0"
 androidxComposeBom = "2024.04.01"
 androidxComposeCompiler = "1.5.10"
 retrofit = "2.11.0"
@@ -51,7 +52,7 @@ androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-compose-ui-util = { group = "androidx.compose.ui", name = "ui-util" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
-androidx-navigation-compose ={ group = "androidx.navigation", name = "navigation-compose", version.ref = "androidComposeNavigation" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidComposeNavigation" }
 
 # Network(Retrofit)
 squareup-retrofit2 = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
@@ -99,6 +100,9 @@ glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = 
 # lifeCycle
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+
+# paging
+androidx-paging = { module = "androidx.paging:paging-runtime", version.ref = "paging" }
 
 [bundles]
 kotlinx-coroutine = ["kotlin-coroutine-core", "kotlin-coroutine-android"]

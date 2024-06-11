@@ -22,22 +22,16 @@ class SplashViewModel @Inject constructor(
     private val _action: MutableSharedFlow<SplashAction> = MutableSharedFlow()
     val action: SharedFlow<SplashAction> get() = _action.asSharedFlow()
 
-    private val _loading: MutableSharedFlow<Boolean> = MutableSharedFlow()
-    val loading : SharedFlow<Boolean> get() = _loading.asSharedFlow()
-
     private fun validateApiKey() {
         viewModelScope.launch {
             RyuSwLogger.v(CLASSNAME, "validateApiKey", "start")
-            _loading.emit(true)
             kotlin.runCatching {
                 checkApiKeyValidateUseCase(BuildConfig.TMDB_API_KEY)
             }.onSuccess {
                 RyuSwLogger.v(CLASSNAME, "validateApiKey", "success")
-                _loading.emit(false)
                 _action.emit(SplashAction.NavigateToLogin)
             }.onFailure {
                 RyuSwLogger.w(CLASSNAME, "validateApiKey", "exception = ${it.message}")
-                _loading.emit(false)
                 _action.emit(SplashAction.ShowToast(it.message.toString()))
             }
             RyuSwLogger.v(CLASSNAME, "validateApiKey", "end")

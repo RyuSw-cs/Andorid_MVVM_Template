@@ -13,7 +13,7 @@ data class MovieListUiModel (
 // TODO UiModel Mapper는 어떻게 구현해야할까?
 fun MovieListInfo.toUiModel() = MovieListUiModel(
     id = id,
-    imgUrl = "https://image.tmdb.org/t/p/w/original$posterPath",
+    imgUrl = posterPath,
     title = title,
     overview = overview,
     voteAverage = voteAverage.toFloat()

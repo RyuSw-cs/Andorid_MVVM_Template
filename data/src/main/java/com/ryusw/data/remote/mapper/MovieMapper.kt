@@ -10,13 +10,13 @@ internal fun ResponsePopularMovieList.toDomain(): List<MovieListInfo> {
     return results.map {
         MovieListInfo(
             adult = it.adult,
-            backdropPath = "${NetworkModule.SERVER_IMAGE_BASE_URL}w342/${it.backdropPath}",
+            backdropPath = "${NetworkModule.SERVER_IMAGE_BASE_URL}original/${it.backdropPath}",
             id = it.id,
             originalTitle = it.originalTitle,
             originalLanguage = it.originalLanguage,
             overview = it.overview,
             popularity = it.popularity,
-            posterPath = "${NetworkModule.SERVER_IMAGE_BASE_URL}w342/${it.posterPath}",
+            posterPath = "${NetworkModule.SERVER_IMAGE_BASE_URL}original/${it.posterPath}",
             releaseData = it.releaseData,
             title = it.title,
             video = it.video,

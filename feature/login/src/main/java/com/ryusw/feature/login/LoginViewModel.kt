@@ -72,7 +72,10 @@ class LoginViewModel @Inject constructor(
             }.onFailure {
                 _loading.emit(false)
                 when (it) {
-                    is AuthException -> _action.emit(LoginAction.ShowDialog(content = "로그인 오류 발생"))
+                    is AuthException.AuthenticationFailedException -> _action.emit(LoginAction.ShowDialog(content = "로그인 오류 발생"))
+                    is AuthException.InvalidAccountException -> _action.emit(LoginAction.ShowDialog(content = "아이디/비밀번호가 다름"))
+                    is AuthException.InvalidApiKeyException -> _action.emit(LoginAction.ShowDialog(content = "유효하지 않는 API KEY"))
+                    is AuthException.InvalidRequestTokenException -> _action.emit(LoginAction.ShowDialog(content = "유효하지 않는 요청토큰"))
                     else -> _action.emit(LoginAction.ShowDialog(content = "알 수 없는 오류 발생"))
                 }
             }
