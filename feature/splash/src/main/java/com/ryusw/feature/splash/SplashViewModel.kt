@@ -26,7 +26,7 @@ class SplashViewModel @Inject constructor(
         viewModelScope.launch {
             RyuSwLogger.v(CLASSNAME, "validateApiKey", "start")
             kotlin.runCatching {
-                checkApiKeyValidateUseCase(BuildConfig.TMDB_API_KEY)
+                checkApiKeyValidateUseCase()
             }.onSuccess {
                 RyuSwLogger.v(CLASSNAME, "validateApiKey", "success")
                 _action.emit(SplashAction.NavigateToLogin)

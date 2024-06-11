@@ -7,13 +7,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.RecyclerView
 import com.ryusw.common.ui.base.BaseFragment
+import com.ryusw.common.ui.base.NavigationEvent
 import com.ryusw.common.ui.dialog.CommonDialogFragment
-import com.ryusw.common.ui.logger.RyuSwLogger
+import com.ryusw.feature.movie.list.databinding.FragmentMovieListBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import ryusw.feature.movie.list.R
-import ryusw.feature.movie.list.databinding.FragmentMovieListBinding
 
 @AndroidEntryPoint
 class MovieListFragment : BaseFragment<FragmentMovieListBinding, MovieListViewModel>() {
@@ -72,7 +70,7 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding, MovieListViewMo
                     viewModel.action.collect { action ->
                         when (action) {
                             is MovieListAction.NavigateToMovieDetail -> {
-
+                                (activity as NavigationEvent).navigateMovieListToMovieDetail(action.id)
                             }
 
                             is MovieListAction.ShowErrorDialog -> {

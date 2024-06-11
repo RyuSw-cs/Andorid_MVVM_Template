@@ -3,5 +3,5 @@ plugins {
 }
 
 android {
-    namespace = "ryusw.feature.movie.list"
+    namespace = "com.ryusw.feature.movie.list"
 }

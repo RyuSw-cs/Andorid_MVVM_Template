@@ -33,6 +33,7 @@ class AndroidDataConventionPlugin : Plugin<Project>{
                     buildFeatures {
                         buildConfig = true
                     }
+                    buildConfigField("String", "TMDB_API_KEY", properties.getProperty("TMDB_API_KEY"))
                 }
             }
 

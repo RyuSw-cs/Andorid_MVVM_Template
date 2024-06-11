@@ -1,5 +1,6 @@
 package com.ryusw
 
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.NavHostFragment
 import com.ryusw.databinding.ActivityMainBinding
 import com.ryusw.common.ui.base.BaseActivity
@@ -15,28 +16,31 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), NavigationEvent {
         supportFragmentManager.findFragmentById(R.id.fcv_main) as NavHostFragment
     }
 
-    override fun init() {
-        navHostFragment.navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            when (destination.id) {
-                ryusw.feature.login.R.id.loginFragment -> {
-
-                }
-            }
-        }
-    }
+    override fun init() { }
 
     override fun navigateSplashToLogin() {
-        with(navHostFragment.navController){
+        with(navHostFragment.navController) {
             popBackStack(com.ryusw.feature.splash.R.id.navigation_splash, true)
             navigate(R.id.action_splash_to_login)
         }
     }
 
     override fun navigateLoginToMovieList() {
-        navHostFragment.navController.navigate(R.id.action_login_to_movie_list)
+        with(navHostFragment.navController){
+            popBackStack(com.ryusw.feature.login.R.id.navigation_login, true)
+            navigate(R.id.action_login_to_movie_list)
+        }
     }
 
-    override fun navigateMovieListToMovieInfo(id: Int) {
+    override fun navigateMovieListToMovieDetail(id: Int) {
+        val bundle = bundleOf("id" to id)
+        navHostFragment.navController.navigate(R.id.action_movie_list_to_movie_detail, bundle)
+    }
 
+    override fun navigateMovieDetailToMovieList() {
+        with(navHostFragment.navController){
+            popBackStack(com.ryusw.feature.movie.list.R.id.navigation_movie_list, true)
+            navigate(R.id.action_movie_detail_to_movie_list)
+        }
     }
 }

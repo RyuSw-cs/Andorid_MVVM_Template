@@ -3,5 +3,5 @@ plugins {
 }
 
 android {
-    namespace = "ryusw.feature.login"
+    namespace = "com.ryusw.feature.login"
 }

@@ -1,6 +1,6 @@
 package com.ryusw.feature.movie.list.model
 
-import com.ryusw.domain.entitiy.movie.MovieListInfo
+import com.ryusw.domain.entitiy.movie.Movie
 
 data class MovieListUiModel (
     val id : Int,
@@ -10,8 +10,7 @@ data class MovieListUiModel (
     val voteAverage : Float
 )
 
-// TODO UiModel Mapper는 어떻게 구현해야할까?
-fun MovieListInfo.toUiModel() = MovieListUiModel(
+fun Movie.toUiModel() = MovieListUiModel(
     id = id,
     imgUrl = posterPath,
     title = title,

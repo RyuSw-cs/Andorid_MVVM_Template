@@ -6,9 +6,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.ryusw.feature.movie.list.databinding.ItemMovieListBinding
 import com.ryusw.feature.movie.list.model.MovieListUiModel
-import ryusw.feature.movie.list.R
-import ryusw.feature.movie.list.databinding.ItemMovieListBinding
 
 class MovieListAdapter (
     private val viewModel : MovieListViewModel

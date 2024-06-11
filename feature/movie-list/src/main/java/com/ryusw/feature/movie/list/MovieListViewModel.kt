@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ryusw.feature.movie.list.BuildConfig
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,7 +32,7 @@ class MovieListViewModel @Inject constructor(
         viewModelScope.launch {
             _loading.emit(true)
             runCatching {
-                getPopularMovieListUseCase(BuildConfig.TMDB_API_KEY, "ko, en-US", _state.value.page)
+                getPopularMovieListUseCase("ko, en-US", _state.value.page)
             }.onSuccess {data ->
                 _loading.emit(false)
                 val movieUiModelList = data.map {

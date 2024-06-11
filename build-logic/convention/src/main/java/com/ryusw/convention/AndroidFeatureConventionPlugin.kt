@@ -25,18 +25,9 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 apply("ryusw.hilt")
             }
 
-            val properties = Properties()
-            properties.load(project.rootProject.file("local.properties").inputStream())
-
             extensions.configure<LibraryExtension> {
                 configureCommonAndroid(this)
                 configureAndroidCompose(this)
-                defaultConfig {
-                    buildFeatures {
-                        buildConfig = true
-                    }
-                    buildConfigField("String", "TMDB_API_KEY", properties.getProperty("TMDB_API_KEY"))
-                }
             }
 
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")

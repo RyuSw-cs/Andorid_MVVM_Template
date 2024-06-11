@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 internal data class ResponsePopularMovie (
     @SerializedName("adult")
-    val adult : String,
+    val adult : Boolean,
     @SerializedName("backdrop_path")
-    val backdropPath : String,
+    val backdropPath : String?,
     @SerializedName("genre_ids")
     val genreIds : List<Int>,
     @SerializedName("id")

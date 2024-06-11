@@ -8,10 +8,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.ryusw.common.ui.base.BaseFragment
 import com.ryusw.common.ui.base.NavigationEvent
 import com.ryusw.common.ui.dialog.CommonDialogFragment
+import com.ryusw.feature.login.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import ryusw.feature.login.R
-import ryusw.feature.login.databinding.FragmentLoginBinding
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {

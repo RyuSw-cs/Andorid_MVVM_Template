@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ryusw.feature.login.BuildConfig
 import javax.inject.Inject
 
 @HiltViewModel
@@ -35,7 +34,7 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             _loading.emit(true)
             runCatching {
-                getRequestTokenUseCase(BuildConfig.TMDB_API_KEY)
+                getRequestTokenUseCase()
             }.onSuccess {
                 _loading.emit(false)
                 login(it.requestToken)
@@ -63,8 +62,7 @@ class LoginViewModel @Inject constructor(
                 loginUseCase(
                     id = state.value.id,
                     password = state.value.password,
-                    requestToken = requestToken,
-                    apiKey = BuildConfig.TMDB_API_KEY
+                    requestToken = requestToken
                 )
             }.onSuccess {
                 _loading.emit(false)
