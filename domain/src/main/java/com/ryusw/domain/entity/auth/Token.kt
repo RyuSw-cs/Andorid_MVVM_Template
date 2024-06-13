@@ -1,6 +1,6 @@
-package com.ryusw.domain.entitiy.auth
+package com.ryusw.domain.entity.auth
 
-data class Session (
+data class Token (
     val expiresAt : String,
     val requestToken : String
 )

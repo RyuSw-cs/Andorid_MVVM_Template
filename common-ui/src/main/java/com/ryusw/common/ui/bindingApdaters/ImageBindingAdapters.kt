@@ -8,7 +8,7 @@ import com.ryusw.common.R
 object ImageBindingAdapters {
     @JvmStatic
     @BindingAdapter("imageUrl")
-    fun ImageView.setImageByUrl(url: String) {
+    fun ImageView.setImageByUrl(url: String?) {
         Glide.with(this)
             .load(url)
             .error(R.drawable.ic_main_logo)

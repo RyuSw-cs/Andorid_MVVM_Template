@@ -1,6 +1,6 @@
 package com.ryusw.domain.usecase.auth
 
-import com.ryusw.domain.entitiy.auth.Token
+import com.ryusw.domain.entity.auth.Token
 import com.ryusw.domain.repository.AuthRepository
 import javax.inject.Inject
 

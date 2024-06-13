@@ -1,5 +1,6 @@
 package com.ryusw.feature.movie.detail
 
+import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ryusw.domain.exception.MovieException
@@ -27,16 +28,16 @@ class MovieDetailViewModel @Inject constructor(
     private val _action: MutableSharedFlow<MovieDetailAction> = MutableSharedFlow()
     val action: SharedFlow<MovieDetailAction> get() = _action.asSharedFlow()
 
-    private val _loading: MutableSharedFlow<Boolean> = MutableSharedFlow()
-    val loading: SharedFlow<Boolean> get() = _loading.asSharedFlow()
+    private val _loading: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val loading: StateFlow<Boolean> get() = _loading.asStateFlow()
 
     fun getMovieDetail(movieId: Int) {
         viewModelScope.launch {
-            _loading.emit(true)
+            _loading.value = true
             runCatching {
                 getMovieDetailUseCase(language = "en-US", movieId = movieId)
             }.onSuccess {
-                _loading.emit(false)
+                _loading.value = false
                 val movieDetailUiModel = it.toUiModel()
                 _state.update { before ->
                     before.copy(
@@ -44,7 +45,7 @@ class MovieDetailViewModel @Inject constructor(
                     )
                 }
             }.onFailure {
-                _loading.emit(false)
+                _loading.value = false
                 when (it) {
                     is MovieException.MovieNotFoundException -> {
                         _action.emit(MovieDetailAction.ShowToastAndBack(it.msg))

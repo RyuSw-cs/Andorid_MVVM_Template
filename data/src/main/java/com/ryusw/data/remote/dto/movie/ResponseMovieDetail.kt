@@ -12,15 +12,15 @@ internal data class ResponseMovieDetail(
     @SerializedName("budget")
     val budget : Long,
     @SerializedName("genres")
-    val genres : List<ResponseMovieGenres>,
+    val genres : List<ResponseMovieGenres>? = emptyList(),
     @SerializedName("homepage")
     val homepage : String,
     @SerializedName("id")
     val id : Int,
     @SerializedName("imdb_id")
     val imdbId : String?,
-    @SerializedName("original_language")
-    val originCountry : List<String>,
+    @SerializedName("original_country")
+    val originCountry : List<String>? = emptyList(),
     @SerializedName("original_language")
     val originalLanguage : String,
     @SerializedName("original_title")
@@ -32,9 +32,9 @@ internal data class ResponseMovieDetail(
     @SerializedName("poster_path")
     val posterPath : String,
     @SerializedName("product_companies")
-    val productionCompanies : List<ResponseMovieProductionCompany> = emptyList(),
+    val productionCompanies : List<ResponseMovieProductionCompany>? = emptyList(),
     @SerializedName("production_countries")
-    val productionCountries : List<ResponseMovieProductionCountry> = emptyList(),
+    val productionCountries : List<ResponseMovieProductionCountry>? = emptyList(),
     @SerializedName("release_date")
     val releaseDate : String,
     @SerializedName("revenue")
@@ -42,7 +42,7 @@ internal data class ResponseMovieDetail(
     @SerializedName("runtime")
     val runtime : Int,
     @SerializedName("spoken_languages")
-    val spokenLanguages : List<ResponseMovieSpokenLanguage>,
+    val spokenLanguages : List<ResponseMovieSpokenLanguage>? = emptyList(),
     @SerializedName("status")
     val status : String,
     @SerializedName("tagline")

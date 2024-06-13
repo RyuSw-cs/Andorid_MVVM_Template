@@ -4,6 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <variable
+            name="data"
+            type="com.ryusw.feature.movie.detail.model.MovieDetailUiModel" />
+
         <variable
             name="vm"
             type="com.ryusw.feature.movie.detail.MovieDetailViewModel" />
@@ -16,15 +21,16 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_main"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="invisible">
 
             <ImageView
                 android:id="@+id/img_poster"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:scaleType="centerCrop"
-                app:imageUrl="@{vm.state.movie.posterPath}"
-                app:layout_constraintDimensionRatio="1:1"
+                android:scaleType="fitCenter"
+                app:imageUrl="@{data.posterPath}"
+                app:layout_constraintDimensionRatio="1:1.3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -34,9 +40,10 @@
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="14dp"
                 android:layout_marginTop="14dp"
                 android:ellipsize="end"
-                android:text="@{vm.state.movie.title}"
+                android:text="@{data.title}"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -50,10 +57,11 @@
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
                 android:layout_marginTop="4dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_title"
-                app:movieRating="@{vm.state.movie.voteCount}" />
+                app:movieRating="@{data.voteAverage}" />
 
             <TextView
                 android:id="@+id/tv_vote_count"
@@ -64,15 +72,16 @@
                 app:layout_constraintBottom_toBottomOf="@id/rating_vote_average"
                 app:layout_constraintStart_toEndOf="@id/rating_vote_average"
                 app:layout_constraintTop_toTopOf="@id/rating_vote_average"
-                app:number="@{vm.state.movie.voteCount}"
+                app:number="@{data.voteCount}"
                 tools:text="1,234" />
 
             <TextView
                 android:id="@+id/tv_overview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="14dp"
                 android:layout_marginTop="14dp"
-                android:text="@{vm.state.movie.overview}"
+                android:text="@{data.overview}"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -84,6 +93,7 @@
                 android:id="@+id/tv_genre_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
                 android:layout_marginTop="14dp"
                 android:text="장르"
                 android:textColor="@color/black"
@@ -98,6 +108,7 @@
                 android:id="@+id/tv_genre"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="14dp"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@id/tv_genre_title"
@@ -105,13 +116,14 @@
                 app:layout_constraintHorizontal_weight="4"
                 app:layout_constraintStart_toEndOf="@id/tv_genre_title"
                 app:layout_constraintTop_toTopOf="@id/tv_genre_title"
-                app:list="@{vm.state.movie.genres}"
+                app:list="@{data.genres}"
                 tools:text="장르" />
 
             <TextView
                 android:id="@+id/tv_release_date_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
                 android:layout_marginTop="14dp"
                 android:text="개봉날짜"
                 android:textColor="@color/black"
@@ -126,7 +138,8 @@
                 android:id="@+id/tv_release_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{vm.state.movie.releaseDate}"
+                android:layout_marginEnd="14dp"
+                android:text="@{data.releaseDate}"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@id/tv_release_date_title"
@@ -140,6 +153,7 @@
                 android:id="@+id/tv_budget_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
                 android:layout_marginTop="14dp"
                 android:text="예산"
                 android:textColor="@color/black"
@@ -154,14 +168,15 @@
                 android:id="@+id/tv_budget"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="14dp"
                 android:textColor="@color/black"
                 android:textSize="14sp"
+                app:largeNumber="@{data.budget}"
                 app:layout_constraintBottom_toBottomOf="@id/tv_budget_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="4"
                 app:layout_constraintStart_toEndOf="@id/tv_budget_title"
                 app:layout_constraintTop_toTopOf="@id/tv_budget_title"
-                app:number="@{vm.state.movie.budget}"
                 tools:text="111,222,333" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

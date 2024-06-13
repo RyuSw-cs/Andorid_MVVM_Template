@@ -1,6 +1,6 @@
 package com.ryusw.domain.usecase.movie
 
-import com.ryusw.domain.entitiy.movie.Movie
+import com.ryusw.domain.entity.movie.Movie
 import com.ryusw.domain.repository.MovieRepository
 import javax.inject.Inject
 

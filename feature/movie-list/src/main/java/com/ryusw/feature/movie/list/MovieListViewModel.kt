@@ -47,7 +47,7 @@ class MovieListViewModel @Inject constructor(
                 }
             }.onFailure { exception ->
                 _loading.emit(false)
-                _action.emit(MovieListAction.ShowErrorDialog(exception.message.toString()))
+                _action.emit(MovieListAction.ShowErrorDialog(content = exception.message.toString()))
             }
         }
     }

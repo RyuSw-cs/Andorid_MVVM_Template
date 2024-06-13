@@ -2,8 +2,8 @@ package com.ryusw.data.remote.mapper
 
 import com.ryusw.data.remote.dto.auth.ResponseLoginDto
 import com.ryusw.data.remote.dto.auth.ResponseRequestTokenDto
-import com.ryusw.domain.entitiy.auth.Token
-import com.ryusw.domain.entitiy.auth.Session
+import com.ryusw.domain.entity.auth.Token
+import com.ryusw.domain.entity.auth.Session
 
 internal fun ResponseRequestTokenDto.toDomain() = Token(
     expiresAt = expiresAt,

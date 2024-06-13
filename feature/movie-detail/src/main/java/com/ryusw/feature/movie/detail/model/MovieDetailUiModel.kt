@@ -1,6 +1,6 @@
 package com.ryusw.feature.movie.detail.model
 
-import com.ryusw.domain.entitiy.movie.Movie
+import com.ryusw.domain.entity.movie.Movie
 
 data class MovieDetailUiModel(
     val genres : List<String> = emptyList(),

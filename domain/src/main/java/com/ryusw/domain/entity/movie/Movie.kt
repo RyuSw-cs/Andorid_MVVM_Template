@@ -1,4 +1,4 @@
-package com.ryusw.domain.entitiy.movie
+package com.ryusw.domain.entity.movie
 
 /*
 * TODO 엔티티 설계는 어떻게 해야할까?

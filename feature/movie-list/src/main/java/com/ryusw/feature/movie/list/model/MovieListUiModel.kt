@@ -1,6 +1,6 @@
 package com.ryusw.feature.movie.list.model
 
-import com.ryusw.domain.entitiy.movie.Movie
+import com.ryusw.domain.entity.movie.Movie
 
 data class MovieListUiModel (
     val id : Int,

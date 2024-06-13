@@ -32,7 +32,7 @@ class SplashViewModel @Inject constructor(
                 _action.emit(SplashAction.NavigateToLogin)
             }.onFailure {
                 RyuSwLogger.w(CLASSNAME, "validateApiKey", "exception = ${it.message}")
-                _action.emit(SplashAction.ShowToast(it.message.toString()))
+                _action.emit(SplashAction.ShowToast("알 수 없는 오류가 발생했습니다."))
             }
             RyuSwLogger.v(CLASSNAME, "validateApiKey", "end")
         }

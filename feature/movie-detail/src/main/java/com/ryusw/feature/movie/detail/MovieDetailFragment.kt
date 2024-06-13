@@ -27,13 +27,14 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding, MovieDetail
 
     override fun initObserving() {
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
                 launch {
                     viewModel.state.collect { state ->
                         if (state.noData) {
                             binding.layoutMain.visibility = View.INVISIBLE
                         } else {
                             binding.layoutMain.visibility = View.VISIBLE
+                            binding.data = state.movie
                         }
                     }
                 }

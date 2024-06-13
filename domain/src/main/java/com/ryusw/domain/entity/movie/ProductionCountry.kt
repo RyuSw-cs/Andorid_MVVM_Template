@@ -1,4 +1,4 @@
-package com.ryusw.domain.entitiy.movie
+package com.ryusw.domain.entity.movie
 
 data class ProductionCountry(
     val ISO_3166_1 : String,

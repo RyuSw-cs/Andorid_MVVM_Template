@@ -1,4 +1,4 @@
-package com.ryusw.domain.entitiy.movie
+package com.ryusw.domain.entity.movie
 
 data class SpokenLanguage(
     val englishName: String,

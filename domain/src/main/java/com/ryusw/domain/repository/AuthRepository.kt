@@ -1,7 +1,7 @@
 package com.ryusw.domain.repository
 
-import com.ryusw.domain.entitiy.auth.Token
-import com.ryusw.domain.entitiy.auth.Session
+import com.ryusw.domain.entity.auth.Token
+import com.ryusw.domain.entity.auth.Session
 
 interface AuthRepository {
     suspend fun getRequestToken(): Token

@@ -31,6 +31,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>() {
 
                             is SplashAction.ShowToast -> {
                                 showToast(action.message)
+                                requireActivity().finishAffinity()
                             }
                         }
                     }

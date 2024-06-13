@@ -4,8 +4,8 @@ import com.ryusw.data.remote.api.AuthApi
 import com.ryusw.data.remote.dto.auth.RequestLoginDto
 import com.ryusw.data.remote.mapper.toDomain
 import com.ryusw.data.util.HandleApi
-import com.ryusw.domain.entitiy.auth.Token
-import com.ryusw.domain.entitiy.auth.Session
+import com.ryusw.domain.entity.auth.Token
+import com.ryusw.domain.entity.auth.Session
 import com.ryusw.domain.repository.AuthRepository
 import javax.inject.Inject
 import javax.inject.Singleton
