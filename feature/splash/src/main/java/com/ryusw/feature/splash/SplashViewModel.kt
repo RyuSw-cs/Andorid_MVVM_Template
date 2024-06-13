@@ -2,7 +2,6 @@ package com.ryusw.feature.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ryusw.common.ui.logger.RyuSwLogger
 import com.ryusw.domain.usecase.auth.CheckApiKeyValidateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -24,22 +23,14 @@ class SplashViewModel @Inject constructor(
 
     private fun validateApiKey() {
         viewModelScope.launch {
-            RyuSwLogger.v(CLASSNAME, "validateApiKey", "start")
             kotlin.runCatching {
                 checkApiKeyValidateUseCase()
             }.onSuccess {
-                RyuSwLogger.v(CLASSNAME, "validateApiKey", "success")
                 _action.emit(SplashAction.NavigateToLogin)
             }.onFailure {
-                RyuSwLogger.w(CLASSNAME, "validateApiKey", "exception = ${it.message}")
                 _action.emit(SplashAction.ShowToast("알 수 없는 오류가 발생했습니다."))
             }
-            RyuSwLogger.v(CLASSNAME, "validateApiKey", "end")
         }
-    }
-
-    companion object {
-        private const val CLASSNAME = "SplashViewModel"
     }
 }
 
